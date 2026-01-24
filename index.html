@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>The Grand Budapest Wedding</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Libre+Baskerville:wght@400;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --coral: #f2a3a3;
+  --pastel-blue: #9bbfd9;
+  --paper: #fffdf9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #faf7f3;
+  font-family: 'Libre Baskerville', serif;
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+/* NAME GATE */
+#nameGate {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name-card {
+  background: white;
+  padding: 60px 70px;
+  border-radius: 28px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.name-card h1 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 30px;
+}
+
+.name-card input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 18px;
+  border-radius: 30px;
+  border: 1.5px solid var(--coral);
+  font-family: 'Cormorant Garamond', serif;
+  text-align: center;
+  outline: none;
+}
+
+/* BOOK */
+.book {
+  width: 1200px;
+  background: var(--paper);
+  border-radius: 28px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+  padding: 60px 70px 90px;
+  position: relative;
+  display: none;
+}
+
+/* SPREAD */
+.spread {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.spread.active {
+  display: grid;
+}
+
+/* LEFT PAGE */
+.left-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-page img {
+  max-width: 100%;
+  border-radius: 14px;
+}
+
+/* RIGHT PAGE */
+.right-page {
+  font-size: 18px;
+  line-height: 1.9;
+  color: #333;
+}
+
+/* COVER */
+.cover img {
+  max-width: 100%;
+  border-radius: 14px;
+}
+
+/* HEADINGS */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.section-header {
+  font-family: 'Playfair Display', serif;
+  color: var(--coral);
+  font-size: 34px;
+  margin-bottom: 25px;
+}
+
+.fancy {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--coral);
+  font-weight: 700;
+  font-size: 26px;
+}
+
+/* NAV BUTTONS */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+button {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  padding: 12px 34px;
+  border-radius: 30px;
+  border: 1.5px solid var(--coral);
+  background: white;
+  color: var(--coral);
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--coral);
+  color: white;
+}
+
+/* FOOTER */
+.footer {
+  position: absolute;
+  bottom: 35px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--pastel-blue);
+  padding: 0 40px;
+  white-space: nowrap;
+}
+
+/* EMPHASIS */
+.pink { color: #e8a0b6; font-weight: bold; }
+.blue { color: #9bbfd9; font-weight: bold; }
+</style>
+</head>
+
+<body>
+
+<!-- NAME INPUT SCREEN -->
+<div id="nameGate">
+  <div class="name-card">
+    <h1>Enter Family Name</h1>
+    <input id="familyNameInput" type="text" placeholder="e.g., Gohil" />
+    <div style="margin-top: 30px;">
+      <button onclick="enterBook()">Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOOK -->
+<div class="book">
+
+  <!-- COVER -->
+  <div class="spread active" id="cover">
+    <div class="left-page cover">
+      <img src="https://assets.codepen.io/16307389/cover.png" alt="" />
+    </div>
+    <div class="right-page" style="display:flex;align-items:center;justify-content:center;">
+      <button onclick="goTo('page1')">Open Book</button>
+    </div>
+  </div>
+
+  <!-- PAGE 1 -->
+  <div class="spread" id="page1">
+    <div class="left-page">
+      <img src="https://assets.codepen.io/16307389/PNG%20image_1.png" alt="" />
+    </div>
+    <div class="right-page">
+      <h1>Welcome to The Grand Budapest Wedding!</h1>
+
+      <p><strong>Dearest <span id="familyNameDisplay"></span> Family,</strong></p>
+
+      <p>
+        It brings us immense joy to know that you will be joining us for
+        <span class="fancy">The Grand Budapest Wedding ✨</span>.
+        We cannot wait to welcome you and celebrate these extraordinary days together.
+      </p>
+
+      <p>
+        As we begin writing this chapter of our family’s story, we wish to share a bit more
+        about our celebration so that you may have what you need to begin making your arrangements
+        for <strong>Shivani &amp; Sajal</strong>'s wedding.
+      </p>
+
+      <div class="nav">
+        <button onclick="goTo('cover')">Back</button>
+        <button onclick="goTo('page2')">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="spread" id="page2">
+    <div class="left-page">
+      <img src="https://assets.codepen.io/16307389/PNG%20image_3.png" alt="" />
+    </div>
+    <div class="right-page">
+      <div class="section-header">The When</div>
+
+      <p>
+        Shivani &amp; Sajal’s wedding will unfold across several thoughtfully planned days,
+        each marking a meaningful chapter of the celebration!
+      </p>
+
+      <p>We warmly request your presence for the entire duration of the wedding festivities:</p>
+
+      <p class="fancy">
+        Saturday, August 22nd through Tuesday, August 25th, 2026
+      </p>
+
+      <p>
+        The wedding celebration will formally begin with a Welcome Dinner at 6PM on the evening of August 22nd.
+      </p>
+
+      <p>
+        The festivities will conclude with a floating Goodbye Breakfast from 8AM–11:30AM on August 25th,
+        with W Budapest hotel checkout promptly at 12PM.
+      </p>
+
+      <div class="nav">
+        <button onclick="goTo('page1')">Back</button>
+        <button onclick="goTo('page3')">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="spread" id="page3">
+    <div class="left-page">
+      <img src="https://assets.codepen.io/16307389/PNG%20image_2.png" alt="" />
+    </div>
+    <div class="right-page">
+      <div class="section-header">The Where</div>
+
+      <p>
+        As we prepare to lovingly send
+        <span class="pink">Shivani</span> off to
+        <span class="blue">Dulhe ki Ghar</span> (Groom’s Home),
+        we are honored to host you as our esteemed guests for the entire duration
+        of the wedding celebrations at our wedding residence:
+      </p>
+
+      <p class="fancy">
+        The W Budapest, Drechsler Palace
+      </p>
+
+      <p>
+        where we have arranged a complete hotel buyout, to be entirely filled with
+        <em>your</em> enjoyment, laughter, blessings, and love ❤️.
+      </p>
+
+      <p>
+        Your room assignment will be shared in July. Until then, we kindly encourage you
+        to book your travel to ensure arrival in Budapest by August 22nd ✈️.
+      </p>
+
+      <div class="nav">
+        <button onclick="goTo('page2')">Back</button>
+        <button onclick="goTo('page4')">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="spread" id="page4">
+    <div class="left-page">
+      <img src="https://assets.codepen.io/16307389/PNG%20image.png" alt="" />
+    </div>
+    <div class="right-page">
+      <div class="section-header">The End</div>
+
+      <p>
+        Every story is shaped by the people who gather around it. You have helped fill ours
+        with endless love and a lifetime of unforgettable moments.
+      </p>
+
+      <p>
+        As we gather in Budapest to celebrate <strong>Shivani &amp; Sajal's</strong> marriage,
+        we do so with full hearts and deep gratitude for your family.
+      </p>
+
+      <p><strong><em>Thank you for being part of our story so far.</em></strong></p>
+
+      <p>We cannot wait to write the next chapter together in Budapest!</p>
+
+      <p>
+        With much love and anticipation,<br>
+        <strong>The Gohil Family</strong>
+      </p>
+
+      <div class="nav">
+        <button onclick="goTo('cover')">The End</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Shivani &amp; Sajal's Wedding | Budapest, Hungary | Aug 22nd–25th, 2026
+  </div>
+
+</div>
+
+<script>
+function goTo(id) {
+  document.querySelectorAll('.spread').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function enterBook() {
+  const input = document.getElementById('familyNameInput');
+  const name = input.value.trim();
+
+  if (!name) {
+    input.focus();
+    return;
+  }
+
+  document.getElementById('familyNameDisplay').textContent = name;
+  document.getElementById('nameGate').style.display = 'none';
+  document.querySelector('.book').style.display = 'block';
+
+  goTo('cover');
+}
+</script>
+
+</body>
+</html>
